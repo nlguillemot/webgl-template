@@ -35,7 +35,7 @@ function init (gl) {
                              "varying lowp vec4 fragmentColor;\n" +
                              "\n" +
                              "void main() {\n" +
-                             "    fragmentColor = vertexColor * tint;\n" +
+                             "    fragmentColor = vertexColor + tint;\n" +
                              "    gl_Position = vertexPosition;\n" +
                              "}\n";
 
@@ -84,7 +84,7 @@ function draw (gl) {
     var strobePeriodInSeconds = 3;
     var tint = Math.abs(Math.sin(Math.PI / strobePeriodInSeconds * currentTimeInSeconds));
     var tintLocation = gl.getUniformLocation(gShaderProgram, "tint");
-    gl.uniform4f(tintLocation, tint, tint, tint, 1.0);
+    gl.uniform4f(tintLocation, tint, 0.0, 0.0, 1.0);
 
     // explain to GL how to read the raw position data that was uploaded, then enable it.
     var positionLocation = gl.getAttribLocation(gShaderProgram, "vertexPosition");
