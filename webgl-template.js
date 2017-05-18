@@ -11,8 +11,17 @@ function onload () {
     // do one-time initialization of graphics resources
     init(gl);
 
-    // call draw() approx. 60 times per second. (60fps)
-    setInterval(function () { draw(gl); }, 1000/60);
+    // the callback for each frame of animation (ie. at ~60fps)
+    function animationCallback(timestamp) {
+        // draw this frame
+        draw(gl, timestamp);
+        
+        // request the next frame of animation
+        window.requestAnimationFrame(animationCallback);
+    };
+    
+    // kick off the first animation frame
+    window.requestAnimationFrame(animationCallback);
 }
 
 function init (gl) {
@@ -72,7 +81,7 @@ function init (gl) {
     gl.linkProgram(gShaderProgram);
 }
 
-function draw (gl) {
+function draw (gl, timestamp) {   
     // clear the screen
     gl.clear(gl.COLOR_BUFFER_BIT);
 
