@@ -91,7 +91,7 @@ function draw (gl, scene, timestamp) {
     gl.useProgram(scene.shaderProgram);
 
     // update the uniform tint
-    var currentTimeInSeconds = Date.now() / 1000.0;
+    var currentTimeInSeconds = timestamp / 1000.0;
     var strobePeriodInSeconds = 3;
     var tint = Math.abs(Math.sin(Math.PI / strobePeriodInSeconds * currentTimeInSeconds));
     var tintLocation = gl.getUniformLocation(scene.shaderProgram, "tint");
